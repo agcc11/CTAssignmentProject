@@ -35,15 +35,31 @@ public class Demo implements ITestListener{
 		ChromeOptions op=new ChromeOptions();
 		op.addArguments("--remote-allow-origins=*");
 		WebDriver driver=new ChromeDriver(op);
-		driver.get("https://www.aarpmedicareplans.com/");
-		Set<Cookie>cs=driver.manage().getCookies();
-		System.out.println(cs.size());
-		
-		for(Cookie cookies:cs)
+		driver.get("https://www.w3schools.com/html/html_tables.asp");
+		int rr=driver.findElements(By.xpath("//table[@id='customers']//tr")).size();
+		int cc=driver.findElements(By.xpath("//table[@id='customers']//th")).size();
+		System.out.println(rr);
+		System.out.println(cc);
+		Thread.sleep(3000);
+		boolean r=false;
+		for(int i=1;i<rr;i++)
 		{
-			System.out.println("cokkie name:" +cookies.getName()+" "+ "cokkie value:" +cookies.getValue());
+			for(int j=1;j<=cc;j++)
+			{
+				String te=driver.findElement(By.xpath("//*[@id=\"customers\"]/tbody/tr["+i+"]/td["+j+"]")).getText();
+				if(te.equals("Roland Mendel"))
+				{
+					r=true;
+					break;
+				}
+			}
 		}
-		
+
+		if(r)
+			System.out.println("present");
+			
+		else
+			System.out.println("not present");
 			
 		
 		
