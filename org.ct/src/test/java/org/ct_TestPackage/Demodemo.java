@@ -15,13 +15,33 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.annotations.Test;
 
 public class Demodemo {
+	
+	
+	@Test(dataProvider="mydata",dataProviderClass=DataProviderClass.class)
+	public void dataprovidertest(String un,String pass)
+	{
+		System.setProperty("webdriver.chrome.driver",System.getProperty("user.dir")+"//Drivers//chromedriver.exe");
+		ChromeOptions op = new ChromeOptions();
+		op.addArguments("--remote-allow-origins=*");
+		WebDriver driver=new ChromeDriver(op);
+		driver.get("https://www.odoo.com/web/login");
+		driver.findElement(By.xpath("//*[@id=\"login\"]")).sendKeys(un);
+		driver.findElement(By.xpath("//*[@id=\"password\"]")).sendKeys(pass);
 
-	public static void main(String[] args) throws InterruptedException {
+		
+		
+	}
+	
+	
+
+//	public static void main(String[] args) throws InterruptedException {
 		
 		
 //		System.setProperty("webdriver.edge.driver",".//Drivers/msedgedriver.exe/");
@@ -69,23 +89,8 @@ public class Demodemo {
 //			System.out.println("not sorted");
 //		
 		
-		String s="hello pune";
 		
-		String ss[]=s.split(" ");
-		
-		String out=" ";
-		
-		for(String word:ss)
-		{
-			String rev=" ";
-			for(int i=word.length()-1;i>=0;i--)
-			{
-				rev=rev+word.charAt(i);
-			}
-			out=out+rev;
-		}
-		System.out.println(out);
-		
-	}
+	
+	
 
 }
