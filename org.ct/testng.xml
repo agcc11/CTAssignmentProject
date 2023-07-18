@@ -8,7 +8,7 @@
  
  
   <test thread-count="5" name="Test">
-	  <parameter name="browser" value="edge"></parameter>
+	  <parameter name="browser" value="chrome"></parameter>
     <classes>
       <class name="org.ct_TestPackage.TestClass01"/>
     </classes>

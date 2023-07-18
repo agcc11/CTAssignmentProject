@@ -7,7 +7,9 @@ import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterClass;
@@ -28,6 +30,8 @@ public class BaseClass {
 		if(browser.equals("chrome"))
 		{
 			System.setProperty("webdriver.chrome.driver",System.getProperty("user.dir")+"//Drivers//chromedriver.exe");
+			ChromeOptions op = new ChromeOptions();
+			op.addArguments("--remote-allow-origins=*");
 			driver=new ChromeDriver();
 			driver.manage().timeouts().pageLoadTimeout(60,TimeUnit.SECONDS);
 			driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
@@ -39,7 +43,9 @@ public class BaseClass {
 		else if(browser.equals("edge"))
 		{
 			System.setProperty("webdriver.edge.driver",System.getProperty("user.dir")+"//Drivers//msedgedriver.exe");
-			driver=new EdgeDriver();
+			EdgeOptions op = new EdgeOptions();
+			op.addArguments("--remote-allow-origins=*");
+			driver=new EdgeDriver(op);
 			driver.manage().timeouts().pageLoadTimeout(60,TimeUnit.SECONDS);
 			driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 			driver.get(pro.getProperty("url"));
